@@ -1,0 +1,99 @@
+{%extends 'layouts.layout_admin'%}
+{%block page_title%}Profile Settings{%endblock%}
+{%block page_style%}
+
+{%endblock%}
+{% set admin = auth_user() %}
+{%block main_content%}
+<!-- Main section-->
+<section class="section-container">
+    <!-- Page content-->
+    <div class="content-wrapper">
+        <div class="container-md">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="card b">
+                        <div class="card-header bg-gray-lighter text-bold">Personal Settings</div>
+                        <div class="list-group">
+                            <a class="list-group-item list-group-item-action active" href="#tabSetting1" data-toggle="tab">Profile</a>
+                            <a class="list-group-item list-group-item-action" href="#tabSetting2" data-toggle="tab">Password</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="tab-content p-0 b0">
+                        <div class="tab-pane active" id="tabSetting1">
+                            <div class="card b">
+                                <div class="card-header bg-gray-lighter text-bold">Profile</div>
+                                <div class="card-body">
+                                    <form action="{{url('/dashboard/profile-settings')}}/{{admin.id}}" method="post" enctype="multipart/form-data" data-parsley-validate="" novalidate="">
+                                        {{csrf_field()}}
+                                        <input type="hidden" name="_method" value="PUT">
+                                        <div class="form-group">
+                                            <label>Photo</label>
+                                            <img style="margin-bottom: 10px;" src="{{url(admin.photo)}}"class="img-thumbnail" alt="">
+                                            <input name="image" class="form-control filestyle" type="file" data-input="false" data-classbutton="btn btn-secondary" data-classinput="form-control inline" data-text="Upload new photo" data-icon="&lt;span class='fa fa-upload mr'&gt;&lt;/span&gt;">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>First Name*</label>
+                                            <input name="first_name" class="form-control" type="text" value="{{admin.first_name}}" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Last Name</label>
+                                            <input name="last_name" class="form-control" type="text" required value="{{admin.last_name}}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Email*</label>
+                                            <input name="email" class="form-control" type="text" required value="{{admin.email}}" data-parsley-type="email">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>address</label>
+                                            <textarea name="address" class="form-control" rows="3">{{admin.address}}</textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Birth Date</label>
+                                            <input class="form-control my-datepicker" name="birth_date" required="required" readonly value="{{user.birth_date | date('Y-m-d')}}" type="text">
+                                        </div>
+                                        <button class="btn btn-info" type="submit">Update Profile</button>
+                                        <p>
+                                            <small class="text-muted">* Required field, should not be empty</small>
+                                        </p>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tabSetting2">
+                            <div class="card b">
+                                <div class="card-header bg-gray-lighter text-bold">Password</div>
+                                <div class="card-body">
+                                    <form method="post" action="{{url('/dashboard/profile-settings')}}/{{admin.id}}/password" data-parsley-validate="" novalidate="">
+                                        {{csrf_field()}}
+                                        <input type="hidden" name="_method" value="PUT">
+                                        <div class="form-group">
+                                            <label>Current password</label>
+                                            <input class="form-control" type="password" required data-parsley-minlength="6" data-parsley-maxlength="25">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>New password</label>
+                                            <input class="form-control" type="password" required data-parsley-minlength="6" data-parsley-maxlength="25">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Confirm new password</label>
+                                            <input class="form-control" type="password" required data-parsley-minlength="6" data-parsley-maxlength="25">
+                                        </div>
+                                        <button class="btn btn-info" type="submit">Update password</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{%endblock%}
+{%block page_script%}
+<!-- FILESTYLE-->
+<script src="{{asset('angleadmin/vendor/bootstrap-filestyle/src/bootstrap-filestyle.js')}}"></script>
+{%endblock%}

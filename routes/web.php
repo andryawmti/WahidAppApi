@@ -29,12 +29,16 @@ Route::prefix('user')->group(function (){
     Route::post('/logout', 'Auth\UserLoginController@userLogout')->name('user.logout');
 });
 
-Route::prefix('admin')->group(function(){
+Route::prefix('dashboard')->group(function(){
     Route::get('/login', 'Auth\AdminLoginController@showLoginForm')->name('admin.login');
     Route::post('/login', 'Auth\AdminLoginController@login')->name('admin.login.submit');
     Route::post('/logout', 'Auth\AdminLoginController@adminLogout')->name('admin.logout');
     Route::resource('user', 'UserController');
     Route::put('/user/{id}/password', 'UserController@UpdatePassword')->name('user.update_password');
+    Route::resource('admin', 'AdminController');
+    Route::get('/profile-settings', 'DashboardController@profileSettings')->name('profile.settings');
+    Route::put('/profile-settings/{id}', 'DashboardController@updateProfile');
+    Route::put('/profile-settings/{id}/password', 'DashboardController@updatePassword');
     Route::get('/', 'DashboardController@index')->name('admin.dashboard');
 
 });
