@@ -17,18 +17,18 @@
     <!-- Page content-->
     <div class="content-wrapper">
         <div class="content-heading">
-            <div>User Management
-                <small>Create, Edit And Delete User.</small>
+            <div>Admin Management
+                <small>Create, Edit And Delete Admin.</small>
             </div>
         </div>
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">
-                        <a href="{{route('user.create')}}" class="btn btn-sm btn-info"><em class="icon-user-follow"></em> Add New user </a>
+                        <a href="{{route('admin.create')}}" class="btn btn-sm btn-info"><em class="icon-user-follow"></em> Add New Admin </a>
                     </div>
                     {#<div class="text-sm">When displaying data in a DataTable, it can often be useful to your end users for them to have the ability to obtain the data from the DataTable, extracting it into a file for them to use locally. This can be done with either HTML5
-                        based buttons or Flash buttons.</div>#}
+                    based buttons or Flash buttons.</div>#}
                 </div>
                 <div class="card-body">
                     <table class="table table-striped my-4 w-100" id="datatable1">
@@ -43,20 +43,20 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {%for u in users%}
+                        {%for a in admins%}
                         <tr class="gradeX">
-                            <td>{{u.id}}</td>
-                            <td>{{u.first_name}}</td>
-                            <td>{{u.last_name}}</td>
-                            <td>{{u.email}}</td>
-                            <td>{{u.created_at}}</td>
+                            <td>{{a.id}}</td>
+                            <td>{{a.first_name}}</td>
+                            <td>{{a.last_name}}</td>
+                            <td>{{a.email}}</td>
+                            <td>{{a.created_at}}</td>
                             <td>
-                                <form id="delete_{{u.id}}" action="{{url('/dashboard/user')}}/{{u.id}}" method="post">
+                                <form id="delete_{{a.id}}" action="{{url('/dashboard/admin')}}/{{a.id}}" method="post">
                                     {{csrf_field()}}
                                     <input type="hidden" name="_method" value="DELETE">
                                 </form>
-                                <button id="{{u.id}}" onclick="deleteUser(this.id)" class="btn btn-xs btn-danger"><em class="fa fa-remove"></em></button>
-                                <a href="{{url('/dashboard/user')}}/{{u.id}}/edit" class="btn btn-xs btn-info"><em class="fa fa-edit"></em></a>
+                                <button id="{{a.id}}" onclick="deleteAdmin(this.id)" class="btn btn-xs btn-danger"><em class="fa fa-remove"></em></button>
+                                <a href="{{url('/dashboard/admin')}}/{{a.id}}/edit" class="btn btn-xs btn-info"><em class="fa fa-edit"></em></a>
                             </td>
                         </tr>
                         {%endfor%}
@@ -85,16 +85,16 @@
 <!-- SWEET ALERT-->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
-    function deleteUser(id) {
+    function deleteAdmin(id) {
         swal({
             title: "Are you sure?",
-            text: "You will delete this user permanently!",
+            text: "You will delete this Admin permanently!",
             icon: "warning",
             buttons: true,
             dangerMode: true,
         }).then((willDelete) => {
             if (willDelete) {
-               document.getElementById('delete_'+id).submit();
+                document.getElementById('delete_'+id).submit();
             }
         });
     }

@@ -1,12 +1,8 @@
 {%extends 'layouts.layout_admin'%}
-
+{% block page_title %}Dashboard{%endblock%}
 {%block page_style%}
 <!-- WEATHER ICONS-->
 <link rel="stylesheet" href="{{asset('angleadmin/vendor/weather-icons/css/weather-icons.css')}}">
-<!-- =============== BOOTSTRAP STYLES ===============-->
-<link rel="stylesheet" href="{{asset('angleadmin/css/bootstrap.css')}}" id="bscss">
-<!-- =============== APP STYLES ===============-->
-<link rel="stylesheet" href="{{asset('angleadmin/css/app.css')}}" id="maincss">
 {%endblock%}
 
 {%block main_content%}
@@ -513,6 +509,5 @@
 <script src="{{asset('angleadmin/vendor/ika.jvectormap/jquery-jvectormap-1.2.2.min.js')}}"></script>
 <script src="{{asset('angleadmin/vendor/ika.jvectormap/jquery-jvectormap-world-mill-en.js')}}"></script>
 <script src="{{asset('angleadmin/vendor/ika.jvectormap/jquery-jvectormap-us-mill-en.js')}}"></script>
-<!-- =============== APP SCRIPTS ===============-->
-<script src="{{asset('angleadmin/js/app.js')}}"></script>
+
 {%endblock%}

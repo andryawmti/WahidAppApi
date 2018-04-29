@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Admin;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {
@@ -23,6 +27,57 @@ class DashboardController extends Controller
     {
         return view("partials.page_dashboard");
     }
+
+    public function profileSettings()
+    {
+        return view('partials.page_profile_settings');
+    }
+
+    public function updateProfile(Request $request, $id)
+    {
+        $admin = Admin::find($id);
+        $admin->first_name = $request->input('first_name');
+        $admin->last_name = $request->input('last_name');
+        $admin->email = $request->input('email');
+        $admin->address = $request->input('address');
+        $admin->birth_date = $request->input('birth_date');
+
+        if ($request->hasFile('image')) {
+            $path = Storage::putFile('public/images', $request->file('image'));
+            $file_url = Storage::url($path);
+            $admin->photo = $file_url;
+            $admin->photo_mime = $request->file('image')->getClientMimeType();
+        }
+        $save = $admin->save();
+
+        if ($save) {
+            $error = false;
+            $result = ['success' => "Profile successfully updated"];
+        }else{
+            $error = true;
+            $result = ['error' => "Profile failed to update"];
+        }
+
+        return redirect()->route('profile.settings')->with($result);
+    }
+
+    public function updatePassword(Request $request, $id)
+    {
+        $admin = Admin::find($id);
+        $admin->password = Hash::make($request->input('password'));
+        $save = $admin->save();
+
+        if ($save) {
+            $error = false;
+            $result= ['success' => "Password successfully updated"];
+        }else{
+            $error = true;
+            $result = ['error' => "Password failed to update"];
+        }
+
+        return redirect()->route('profile.settings')->with($result);
+    }
+
 
     /**
      * Show the form for creating a new resource.
