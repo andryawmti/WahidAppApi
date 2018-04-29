@@ -161,8 +161,6 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         TwigBridge\ServiceProvider::class,
-
-        App\Http\Middleware\HttpsProtocol::class,
     ],
 
     /*
