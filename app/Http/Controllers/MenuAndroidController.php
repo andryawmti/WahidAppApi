@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Menu;
 use Illuminate\Http\Request;
 
-class MenuController extends Controller
+class MenuAndroidController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,28 @@ class MenuController extends Controller
     public function index()
     {
         $menus = Menu::all();
-        return view('partials.page_menu_index')->with(['menus' => $menus]);
+        if ($menus) {
+            return response()->json($menus);
+        }
+        return response()->json(array(
+            'message' => 'Menu not found'
+        ));
+    }
+
+    /**
+     * get menu by id
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getMenu($id)
+    {
+        $menu = Menu::find($id);
+        if ($menu) {
+            return response()->json($menu);
+        }
+        return response()->json(array(
+            'message' => 'Menu not found'
+        ));
     }
 
     /**

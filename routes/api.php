@@ -19,8 +19,8 @@ Route::group(['middleware'=>'auth:user-api'], function(){
     Route::post('/user/{id}/password', 'UserControllerApi@updatePassword');
     Route::post('/user/{id}/upload-photo', 'UserControllerApi@uploadPhoto');
     Route::get('/user/{id}/get-photo-profile', 'UserControllerApi@getPhotoProfileUrl');
-    Route::get('/menus', 'MenuController@index');
-    Route::get('/menu/{id}', 'MenuController@getMenu');
+    Route::get('/menus', 'MenuAndroidController@index');
+    Route::get('/menu/{id}', 'MenuAndroidController@getMenu');
 });
 
 Route::group(['middleware'=>'auth:admin-api'], function(){
