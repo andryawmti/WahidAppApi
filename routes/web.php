@@ -39,6 +39,7 @@ Route::prefix('dashboard')->group(function(){
     Route::get('/profile-settings', 'DashboardController@profileSettings')->name('profile.settings');
     Route::put('/profile-settings/{id}', 'DashboardController@updateProfile');
     Route::put('/profile-settings/{id}/password', 'DashboardController@updatePassword');
+    Route::resource('/menu', 'MenuController');
     Route::get('/', 'DashboardController@index')->name('admin.dashboard');
 
 });
