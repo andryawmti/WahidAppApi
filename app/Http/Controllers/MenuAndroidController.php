@@ -16,7 +16,10 @@ class MenuAndroidController extends Controller
     {
         $menus = Menu::all();
         if ($menus) {
-            return response()->json($menus);
+            $response = array(
+                'menu_list' => $menus
+            );
+            return response()->json($response);
         }
         return response()->json(array(
             'message' => 'Menu not found'
