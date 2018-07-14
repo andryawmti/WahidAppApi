@@ -170,7 +170,7 @@
                     <li class="nav-heading ">
                         <span data-localize="sidebar.heading.HEADER">Main Navigation</span>
                     </li>
-                    <li class=" ">
+                    {#<li class=" ">
                         <a href="#dashboard" title="Dashboard" data-toggle="collapse">
                             <div class="float-right badge badge-success">3</div>
                             <em class="icon-speedometer"></em>
@@ -194,8 +194,32 @@
                                 </a>
                             </li>
                         </ul>
+                    </li>#}
+                    <li class=" ">
+                        <a href="{{ url('/dashboard') }}" title="Dashboard">
+                            <em class="icon-speedometer"></em>
+                            <span data-localize="sidebar.nav.DASHBOARD">Dashboard</span>
+                        </a>
                     </li>
                     <li class=" ">
+                        <a href="{{ url('/dashboard/menu') }}" title="Data Menu">
+                            <em class="icon-grid"></em>
+                            <span data-localize="sidebar.nav.DATAMENU">Data Menu</span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="{{ url('/dashboard/user') }}" title="Data User">
+                            <em class="icon-user"></em>
+                            <span data-localize="sidebar.nav.DATAUSER">Data User</span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="{{ url('/dashboard/admin') }}" title="Data Admin">
+                            <em class="icon-eyeglass"></em>
+                            <span data-localize="sidebar.nav.DATAADMIN">Data Admin</span>
+                        </a>
+                    </li>
+                    {#<li class=" ">
                         <a href="widgets.html" title="Widgets">
                             <div class="float-right badge badge-success">30</div>
                             <em class="icon-grid"></em>
@@ -748,7 +772,7 @@
                             <em class="icon-graduation"></em>
                             <span data-localize="sidebar.nav.DOCUMENTATION">Documentation</span>
                         </a>
-                    </li>
+                    </li>#}
                 </ul>
                 <!-- END sidebar nav-->
             </nav>
