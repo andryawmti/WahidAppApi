@@ -13,9 +13,7 @@
 
 Auth::routes();
 
-Route::get('/', function(){
-    return view('welcome');
-});
+Route::get('/', 'Auth\AdminLoginController@showLoginForm');
 
 Route::get('/test', function(){
     return view('test');
