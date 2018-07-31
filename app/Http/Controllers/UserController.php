@@ -140,11 +140,11 @@ class UserController extends Controller
             $result = ['error' => "User failed to update"];
         }
 
-        return redirect()->route('user.index')->with($result);
+        return redirect()->route('user.edit', ['user' => $user->id])->with($result);
 
     }
 
-    public function UpdatePassword(Request $request, $id)
+    public function updatePassword(Request $request, $id)
     {
         $user = User::find($id);
         $user->password = Hash::make($request->input('password'));
@@ -158,7 +158,7 @@ class UserController extends Controller
             $result = ['error' => "Password failed to update"];
         }
 
-        return redirect()->route('user.index')->with($result);
+        return redirect()->route('user.edit', ['user' => $user->id])->with($result);
     }
 
     /**

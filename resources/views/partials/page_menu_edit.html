@@ -20,7 +20,7 @@
         <!-- START row-->
         <div class="row">
             <div class="col-lg-12">
-                <form id="edit-menu" class="form-horizontal" enctype="multipart/form-data" method="POST" action="{{url('/dashboard/menu')}}/{{menu.id}}" data-parsley-validate="" novalidate="">
+                <form id="edit-menu" class="form-horizontal" enctype="multipart/form-data" method="POST" action="{{route('menu.update',menu.id)}}" data-parsley-validate="" novalidate="">
                     <!-- START card-->
                     <div class="card card-default">
                         {#<div class="card-header">

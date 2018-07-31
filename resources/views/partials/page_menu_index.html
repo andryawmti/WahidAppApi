@@ -47,14 +47,14 @@
                             <td>{{m.id}}</td>
                             <td>{{m.title}}</td>
                             <td>{{m.calorie}}</td>
-                            <td>{{m.created_at}}</td>
+                            <td>{{m.created_at | date("d-m-Y")}}</td>
                             <td>
-                                <form id="delete_{{m.id}}" action="{{url('/dashboard/menu')}}/{{m.id}}" method="post">
+                                <form id="delete_{{m.id}}" action="{{route('menu.destroy', m.id)}}" method="post">
                                     {{csrf_field()}}
                                     <input type="hidden" name="_method" value="DELETE">
                                 </form>
                                 <button id="{{m.id}}" onclick="deleteAdmin(this.id)" class="btn btn-xs btn-danger"><em class="fa fa-remove"></em></button>
-                                <a href="{{url('/dashboard/menu')}}/{{m.id}}/edit" class="btn btn-xs btn-info"><em class="fa fa-edit"></em></a>
+                                <a href="{{ route('menu.edit', m.id) }}" class="btn btn-xs btn-info"><em class="fa fa-edit"></em></a>
                             </td>
                         </tr>
                         {%endfor%}

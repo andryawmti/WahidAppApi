@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -26,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/user';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -35,30 +36,16 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest:user', ['except'=>['logout', 'userLogout']]);
+        $this->middleware('guest:admin', ['except'=>['logout']]);
     }
 
     /**
-     * User Logout
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * Show login form
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function userLogout(Request $request)
+    public function showLoginForm()
     {
-        Auth::guard('user')->logout();
-        return redirect()->route('user.login');
-    }
-
-    public function apiLogout()
-    {
-        $user = Auth::guard('api')->user();
-
-        if ($user) {
-            $user->api_token = null;
-            $user->save();
-        }
-
-        return response()->json(['data'=>'User logged out'], 200);
+        return view('auth.login');
     }
 
     /**
@@ -71,25 +58,35 @@ class LoginController extends Controller
      */
     public function login(Request $request)
     {
-        $this->validateLogin($request);
+        // validate the form data
+        $this->validate($request, array(
+            'email' => 'required|email',
+            'password' => 'required|min:6'
+        ));
 
-        if ($this->hasTooManyLoginAttempts($request)) {
-            $this->fireLockoutEvent($request);
+        $credentials = array(
+            'email' => $request->email,
+            'password' => $request->password
+        );
 
-            return $this->sendLockoutResponse($request);
+        // attempt to log the user in
+        if (Auth::guard('admin')->attempt($credentials, $request->remember)) {
+            // if successful, then redirect to their intended location
+            return redirect()->intended(route('dashboard'));
         }
 
-        if ($this->attemptLogin($request)) {
-            $user = $this->guard()->user();
-            $user->generateToken();
-            return response()->json(['data'=>$user->toArray()]);
-        }
+        // if unsuccessful, then redirect back to login with the form data
+        return redirect()->back()->withInput($request->only('email', 'remember'));
+    }
 
-        // If the login attempt was unsuccessful we will increment the number of attempts
-        // to login and redirect the user back to the login form. Of course, when this
-        // user surpasses their maximum number of attempts they will get locked out.
-        $this->incrementLoginAttempts($request);
-
-        return $this->sendFailedLoginResponse($request);
+    /**
+     * Logout
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function logout(Request $request)
+    {
+        Auth::guard('admin')->logout();
+        return redirect()->route('login');
     }
 }
