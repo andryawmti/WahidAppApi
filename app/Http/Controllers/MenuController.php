@@ -116,8 +116,7 @@ class MenuController extends Controller
             error_log($error);
             $result = ['error' => $error];
         }
-        $redirectUrl = '/dashboard/menu/' . $id . '/edit';
-        return redirect($redirectUrl)->with($result);
+        return redirect()->route('menu.edit', ['menu' => $menu->id])->with($result);
     }
 
     /**

@@ -34,7 +34,7 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="edit-profile" role="tabpanel">
-                        <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="{{url('/dashboard/user')}}/{{user.id}}" data-parsley-validate="" novalidate="">
+                        <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="{{route('user.update',user.id)}}" data-parsley-validate="" novalidate="">
                             {{csrf_field()}}
                             <input type="hidden" name="_method" value="PUT">
                             <fieldset>
@@ -131,7 +131,7 @@
                         </form>
                     </div>
                     <div class="tab-pane" id="change-password" role="tabpanel">
-                        <form class="form-horizontal" method="POST" action="{{url('/dashboard/user')}}/{{user.id}}/password" data-parsley-validate="" novalidate="">
+                        <form class="form-horizontal" method="POST" action="{{route('user.update_password',user.id)}}" data-parsley-validate="" novalidate="">
                             {{csrf_field()}}
                             <input type="hidden" name="_method" value="PUT">
                             <fieldset>

@@ -67,7 +67,7 @@ class Handler extends ExceptionHandler
 
         switch ($guard) {
             case 'admin':
-                $login = 'admin.login';
+                $login = 'login';
                 break;
             case 'user-api':
                 return response()->json(array(

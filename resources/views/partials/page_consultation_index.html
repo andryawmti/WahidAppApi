@@ -1,8 +1,8 @@
 {%extends 'layouts.layout_admin'%}
 {%block page_meta%}
-<meta name="keywords" content="user management"/>
+<meta name="keywords" content="Consultation List"/>
 {%endblock%}
-{%block page_title%}User{%endblock%}
+{%block page_title%}Consultations{%endblock%}
 {%block page_style%}
 <!-- Datatables-->
 <link rel="stylesheet" href="{{asset('angleadmin/vendor/datatables.net-bs4/css/dataTables.bootstrap4.css')}}">
@@ -17,16 +17,16 @@
     <!-- Page content-->
     <div class="content-wrapper">
         <div class="content-heading">
-            <div>Menu Management
-                <small>Create, Edit And Delete Menu.</small>
+            <div>Consultation List
+                <small>View the consultations here.</small>
             </div>
         </div>
         <div class="container-fluid">
             <div class="card">
                 <div class="card-header">
-                    <div class="card-title">
-                        <a href="{{route('menu.create')}}" class="btn btn-sm btn-info"><em class="icon-user-follow"></em> Add New Menu </a>
-                    </div>
+                    {#<div class="card-title">
+                        <a href="{{route('admin.create')}}" class="btn btn-sm btn-info"><em class="icon-user-follow"></em> Add New Admin </a>
+                    </div>#}
                     {#<div class="text-sm">When displaying data in a DataTable, it can often be useful to your end users for them to have the ability to obtain the data from the DataTable, extracting it into a file for them to use locally. This can be done with either HTML5
                     based buttons or Flash buttons.</div>#}
                 </div>
@@ -35,26 +35,28 @@
                         <thead>
                         <tr>
                             <th data-priority="1" class="sort-numeric">Id</th>
-                            <th class="fa-sort-alpha-asc">Title</th>
-                            <th class="sort-numeric">Calorie</th>
+                            <th class="fa-sort-alpha-asc">User</th>
+                            <th class="fa-sort-alpha-asc">Menu</th>
+                            <th>Pregnancy Age</th>
                             <th>Created At</th>
                             <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        {%for m in menus%}
+                        {%for c in consultations%}
                         <tr class="gradeX">
-                            <td>{{m.id}}</td>
-                            <td>{{m.title}}</td>
-                            <td>{{m.calorie}}</td>
-                            <td>{{m.created_at | date("d-m-Y")}}</td>
+                            <td>{{c.id}}</td>
+                            <td>{{c.first_name}} {{c.last_name}}</td>
+                            <td>{{c.menu_title}}</td>
+                            <td>{{c.pregnancy_age}}</td>
+                            <td>{{a.created_at | date("d-m-Y")}}</td>
                             <td>
-                                <form id="delete_{{m.id}}" action="{{route('menu.destroy', m.id)}}" method="post">
+                                {#<form id="delete_{{a.id}}" action="{{route('admin.destroy',a.id)}}" method="post">
                                     {{csrf_field()}}
                                     <input type="hidden" name="_method" value="DELETE">
                                 </form>
-                                <button id="{{m.id}}" onclick="deleteAdmin(this.id)" class="btn btn-xs btn-danger"><em class="fa fa-remove"></em></button>
-                                <a href="{{ route('menu.edit', m.id) }}" class="btn btn-xs btn-info"><em class="fa fa-edit"></em></a>
+                                <button id="{{a.id}}" onclick="deleteAdmin(this.id)" class="btn btn-xs btn-danger"><em class="fa fa-remove"></em></button>
+                                <a href="{{route('admin.edit',a.id)}}" class="btn btn-xs btn-info"><em class="fa fa-edit"></em></a>#}
                             </td>
                         </tr>
                         {%endfor%}
@@ -86,7 +88,7 @@
     function deleteAdmin(id) {
         swal({
             title: "Are you sure?",
-            text: "You will delete this Menu permanently!",
+            text: "You will delete this Admin permanently!",
             icon: "warning",
             buttons: true,
             dangerMode: true,

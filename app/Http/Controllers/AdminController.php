@@ -127,10 +127,10 @@ class AdminController extends Controller
             $result = ['error' => "Admin failed to update"];
         }
 
-        return redirect()->route('admin.index')->with($result);
+        return redirect()->route('admin.edit', ['admin' => $admin->id])->with($result);
     }
 
-    public function UpdatePassword(Request $request, $id)
+    public function updatePassword(Request $request, $id)
     {
         $admin = Admin::find($id);
         $admin->password = Hash::make($request->input('password'));
@@ -144,7 +144,7 @@ class AdminController extends Controller
             $result = ['error' => "Password failed to update"];
         }
 
-        return redirect()->route('admin.index')->with($result);
+        return redirect()->route('admin.edit', ['admin' => $admin->id])->with($result);
     }
 
     /**

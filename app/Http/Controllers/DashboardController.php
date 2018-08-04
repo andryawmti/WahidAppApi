@@ -58,7 +58,7 @@ class DashboardController extends Controller
             $result = ['error' => "Profile failed to update"];
         }
 
-        return redirect()->route('profile.settings')->with($result);
+        return redirect()->route('profile')->with($result);
     }
 
     public function updatePassword(Request $request, $id)
@@ -75,7 +75,7 @@ class DashboardController extends Controller
             $result = ['error' => "Password failed to update"];
         }
 
-        return redirect()->route('profile.settings')->with($result);
+        return redirect()->route('profile')->with($result);
     }
 
 

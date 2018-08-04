@@ -26,11 +26,11 @@
                             <div class="card b">
                                 <div class="card-header bg-gray-lighter text-bold">Profile</div>
                                 <div class="card-body">
-                                    <form action="{{url('/dashboard/profile-settings')}}/{{admin.id}}" method="post" enctype="multipart/form-data" data-parsley-validate="" novalidate="">
+                                    <form action="{{route('profile.edit', admin.id)}}" method="post" enctype="multipart/form-data" data-parsley-validate="" novalidate="">
                                         {{csrf_field()}}
                                         <input type="hidden" name="_method" value="PUT">
                                         <div class="form-group">
-                                            <label>Photo</label>
+                                            <!--<label>Photo</label>-->
                                             <img style="margin-bottom: 10px;" src="{{url(admin.photo)}}"class="img-thumbnail" alt="">
                                             <input name="image" class="form-control filestyle" type="file" data-input="false" data-classbutton="btn btn-secondary" data-classinput="form-control inline" data-text="Upload new photo" data-icon="&lt;span class='fa fa-upload mr'&gt;&lt;/span&gt;">
                                         </div>
@@ -66,7 +66,7 @@
                             <div class="card b">
                                 <div class="card-header bg-gray-lighter text-bold">Password</div>
                                 <div class="card-body">
-                                    <form method="post" action="{{url('/dashboard/profile-settings')}}/{{admin.id}}/password" data-parsley-validate="" novalidate="">
+                                    <form method="post" action="{{route('profile.change_password', admin.id)}}" data-parsley-validate="" novalidate="">
                                         {{csrf_field()}}
                                         <input type="hidden" name="_method" value="PUT">
                                         <div class="form-group">

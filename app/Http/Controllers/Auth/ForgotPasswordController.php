@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Mail\ResetPasswordV2;
+use App\User;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -51,6 +52,11 @@ class ForgotPasswordController extends Controller
         $token = str_random(64);
         $link = url('/password/reset').'/'.$token;
 
+        $user = User::where('email', $email)->first();
+        if (!$user instanceof User) {
+            $user = Admin::where('email', $email)->first();
+        }
+
         $resetRequset = DB::table('password_resets')->where('email', '=', $email)->first();
         if (isset($resetRequset)) {
             DB::table('password_resets')->where('email', '=', $email)->delete();
@@ -61,7 +67,7 @@ class ForgotPasswordController extends Controller
             'token' => $token,
         ]);
 
-        Mail::to($email)->send(new ResetPasswordV2($link));
+        Mail::to($email)->send(new ResetPasswordV2($link, $user));
 
         if (!Mail::failures()) {
             $response = Password::RESET_LINK_SENT;

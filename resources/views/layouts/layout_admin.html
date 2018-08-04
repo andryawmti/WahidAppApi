@@ -104,7 +104,7 @@
                                 </style>
                                 <!-- list item-->
                                 <div class="list-group-item list-group-item-action">
-                                    <a href="{{route('profile.settings')}}" class="media profile-logout">
+                                    <a href="{{route('profile')}}" class="media profile-logout">
                                         <div class="align-self-start mr-2">
                                             <em class="icon-user fa-1x text-info"></em>
                                         </div>
@@ -115,7 +115,7 @@
                                 </div>
                                 <!-- list item-->
                                 <div class="list-group-item list-group-item-action">
-                                    <form id="logout-form" action="{{route('admin.logout')}}" method="post">
+                                    <form id="logout-form" action="{{route('logout')}}" method="post">
                                         {{csrf_field()}}
                                     </form>
                                     <a onclick="logout();" href="javascript:void(0)" class="media profile-logout">
@@ -196,25 +196,31 @@
                         </ul>
                     </li>#}
                     <li class=" ">
-                        <a href="{{ url('/dashboard') }}" title="Dashboard">
+                        <a href="{{ route('dashboard') }}" title="Dashboard">
                             <em class="icon-speedometer"></em>
                             <span data-localize="sidebar.nav.DASHBOARD">Dashboard</span>
                         </a>
                     </li>
                     <li class=" ">
-                        <a href="{{ url('/dashboard/menu') }}" title="Data Menu">
+                        <a href="{{ route('consultation.index') }}" title="Data Konsultasi">
+                            <em class="icon-grid"></em>
+                            <span data-localize="sidebar.nav.DATAMENU">Data Konsultasi</span>
+                        </a>
+                    </li>
+                    <li class=" ">
+                        <a href="{{ route('menu.index') }}" title="Data Menu">
                             <em class="icon-grid"></em>
                             <span data-localize="sidebar.nav.DATAMENU">Data Menu</span>
                         </a>
                     </li>
                     <li class=" ">
-                        <a href="{{ url('/dashboard/user') }}" title="Data User">
+                        <a href="{{ route('user.index') }}" title="Data User">
                             <em class="icon-user"></em>
                             <span data-localize="sidebar.nav.DATAUSER">Data User</span>
                         </a>
                     </li>
                     <li class=" ">
-                        <a href="{{ url('/dashboard/admin') }}" title="Data Admin">
+                        <a href="{{ route('admin.index') }}" title="Data Admin">
                             <em class="icon-eyeglass"></em>
                             <span data-localize="sidebar.nav.DATAADMIN">Data Admin</span>
                         </a>

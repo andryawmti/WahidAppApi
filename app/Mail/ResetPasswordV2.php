@@ -11,15 +11,17 @@ class ResetPasswordV2 extends Mailable
 {
     use Queueable, SerializesModels;
     protected $link;
+    protected $user;
 
     /**
-     * Create a new message instance.
-     *
-     * @return void
+     * ResetPasswordV2 constructor.
+     * @param string $link
+     * @param $user
      */
-    public function __construct(string $link)
+    public function __construct(string $link, $user)
     {
         $this->link = $link;
+        $this->user = $user;
     }
 
     /**
@@ -31,6 +33,6 @@ class ResetPasswordV2 extends Mailable
     {
         return $this->subject('Reset Password')
                     ->markdown('email.reset_password_v2')
-                    ->with(['link' => $this->link]);
+                    ->with(['link' => $this->link, 'user' => $this->user]);
     }
 }

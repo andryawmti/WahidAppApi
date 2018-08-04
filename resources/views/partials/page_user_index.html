@@ -49,14 +49,14 @@
                             <td>{{u.first_name}}</td>
                             <td>{{u.last_name}}</td>
                             <td>{{u.email}}</td>
-                            <td>{{u.created_at}}</td>
+                            <td>{{u.created_at | date("d-m-Y")}}</td>
                             <td>
-                                <form id="delete_{{u.id}}" action="{{url('/dashboard/user')}}/{{u.id}}" method="post">
+                                <form id="delete_{{u.id}}" action="{{route('user.destroy',u.id)}}" method="post">
                                     {{csrf_field()}}
                                     <input type="hidden" name="_method" value="DELETE">
                                 </form>
                                 <button id="{{u.id}}" onclick="deleteUser(this.id)" class="btn btn-xs btn-danger"><em class="fa fa-remove"></em></button>
-                                <a href="{{url('/dashboard/user')}}/{{u.id}}/edit" class="btn btn-xs btn-info"><em class="fa fa-edit"></em></a>
+                                <a href="{{ route('user.edit',u.id) }}" class="btn btn-xs btn-info"><em class="fa fa-edit"></em></a>
                             </td>
                         </tr>
                         {%endfor%}
