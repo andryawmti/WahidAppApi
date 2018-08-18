@@ -21,6 +21,7 @@ Route::group(['middleware'=>'auth:user-api'], function(){
     Route::get('/user/{id}/get-photo-profile', 'UserControllerApi@getPhotoProfileUrl');
     Route::get('/menus', 'MenuAndroidController@index');
     Route::get('/menu/{id}', 'MenuAndroidController@getMenu');
+    Route::post('/consultation', 'ConsultationControllerApi@store');
 });
 
 Route::group(['middleware'=>'auth:admin-api'], function(){

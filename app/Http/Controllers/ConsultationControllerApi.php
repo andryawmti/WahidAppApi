@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Consultation;
 use Illuminate\Http\Request;
 
-class ConsultationController extends Controller
+class ConsultationControllerApi extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +14,7 @@ class ConsultationController extends Controller
      */
     public function index()
     {
-        return "Hello";
-        $cons_repo = new Consultation();
-        $consultations = $cons_repo->getConsultations();
-        return view('partials/page_consultation_index')->with(['consultations' => $consultations]);
+        //
     }
 
     /**
@@ -38,7 +35,26 @@ class ConsultationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $consultation = new Consultation();
+        $consultation->user_id = $request->input('user_id');
+        $consultation->sleep_time = $request->input('sleep_time');
+        $consultation->weight = $request->input('weight');
+        $consultation->pregnancy_age = $request->input('pregnancy_age');
+        $consultation->calorie = $request->input('calorie');
+        $consultation->activity = $request->input('activity');
+        $consultation->created_at = date('Y-m-d H:i:s');
+        $message = "Consultation Added Successfully";
+        $error = false;
+        try {
+            $consultation->save();
+        } catch (\Exception $e) {
+            $message = $e->getMessage();
+            $error = true;
+        }
+        return json_encode([
+            'message' => $message,
+            'error' => $error
+        ]);
     }
 
     /**
