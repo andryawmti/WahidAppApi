@@ -9,12 +9,11 @@ class Consultation extends Model
 {
     protected $table = "consultation";
 
-    /*public function getConsultations()
+    public function getConsultations()
     {
-        $consultations = DB::select("SELECT c.*, m.title as menu_title, u.first_name, u.last_name FROM `consultation` as c
-            LEFT JOIN menus as m ON c.menu_id = m.id
-            LEFT JOIN users as u ON c.user_id = u.id
-            ORDER BY created_at DESC");
+        $consultations = DB::select("SELECT c.id, c.user_id, c.weight, c.sleep_time, 
+        c.activity, c.calorie, c.pregnancy_age, DATE_FORMAT(c.created_at, '%d-%m-%y') as created_at
+         , DATE_FORMAT(c.updated_at, '%d-%m-%y') as updated_at FROM `consultation` as c");
         return $consultations;
-    }*/
+    }
 }
