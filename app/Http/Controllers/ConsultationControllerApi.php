@@ -110,7 +110,8 @@ class ConsultationControllerApi extends Controller
 
     public function getUserConsultations($id)
     {
-        $consultations = Consultation::where('user_id',$id)->get();
+        $c_repo = new Consultation();
+        $consultations = $c_repo->getUserConsultations();
         return json_encode([
             'consultation_list' => $consultations
         ]);
