@@ -111,7 +111,7 @@ class ConsultationControllerApi extends Controller
     public function getUserConsultations($id)
     {
         $c_repo = new Consultation();
-        $consultations = $c_repo->getUserConsultations();
+        $consultations = $c_repo->getUserConsultations($id);
         return json_encode([
             'consultation_list' => $consultations
         ]);
