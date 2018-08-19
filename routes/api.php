@@ -22,6 +22,8 @@ Route::group(['middleware'=>'auth:user-api'], function(){
     Route::get('/menus', 'MenuAndroidController@index');
     Route::get('/menu/{id}', 'MenuAndroidController@getMenu');
     Route::post('/consultation', 'ConsultationControllerApi@store');
+    Route::get('/consultation/{id}', 'ConsultationControllerApi@getConsultation');
+    Route::get('/consultations/{userId}', 'ConsultationControllerApi@getUserConsultations');
 });
 
 Route::group(['middleware'=>'auth:admin-api'], function(){
