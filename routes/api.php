@@ -24,6 +24,7 @@ Route::group(['middleware'=>'auth:user-api'], function(){
     Route::post('/consultation', 'ConsultationControllerApi@store');
     Route::get('/consultation/{id}', 'ConsultationControllerApi@getConsultation');
     Route::get('/consultations/{userId}', 'ConsultationControllerApi@getUserConsultations');
+    Route::get('/tips', 'TipsControllerApi@getTips');
 });
 
 Route::group(['middleware'=>'auth:admin-api'], function(){
